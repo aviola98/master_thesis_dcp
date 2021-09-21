@@ -7,6 +7,10 @@ library(tm)
 library(DT)
 library(igraph)
 library(ggraph)
+library(wordcloud)
+library(RColorBrewer)
+install.packages("wordcloud2")
+library(wordcloud2)
 
 #abrindo arquivo
 
@@ -322,3 +326,32 @@ ONU2021_freq <-
   labs(caption = "a palavra 'us' está para US dollars")
 
 ONU2021_freq
+
+#nuvem de palavra
+
+ONU_palavras <-
+ONU_palavras %>%
+  count(palavra) %>%
+  #paste("estados","unidos", sep=" ") %>%
+  #paste("direitos","humanos",sep=" ")
+
+set.seed(1234)
+
+wordcloud(words  = ONU_palavras$palavra,
+          freq = ONU_palavras$n,
+          min.freq = 1,
+          max.words = 100,
+          scale=c(3,0.4) ,
+          random.order = F,
+          rot.per = 0.35,
+          colors = brewer.pal(8,"Dark2"))
+
+set.seed(1234)
+
+wordcloud2(data = ONU_palavras,
+           size = 1.6,
+           color='random-dark')
+
+set.seed(1234)
+
+wordcloud2(data=ONU_palavras, size = 0.7, shape = 'pentagon')
