@@ -349,7 +349,7 @@ wordcloud(words  = ONU_palavras$palavra,
 set.seed(1234)
 
 wordcloud2(data = ONU_palavras,
-           size = 1.6,
+           size = 5,
            color='random-dark')
 
 set.seed(1234)
